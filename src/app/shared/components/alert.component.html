@@ -1,0 +1,12 @@
+<ng-container *ngIf="result">
+  <div class="alert" [ngClass]="{'alert-success': result.success, 'alert-danger':!result.success}" role="alert">
+    <i *ngIf="result.success" class="fa-solid fa-check"></i>
+    <i *ngIf="!result.success" class="fa-solid fa-triangle-exclamation"></i>
+    {{result.message}}
+    <ul *ngIf="!!result.subMessages && !!result.subMessages.length">
+      <li *ngFor="let message of result.subMessages">
+        {{message}}
+      </li>
+    </ul>
+  </div>
+</ng-container>

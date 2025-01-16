@@ -1,0 +1,17 @@
+<ng-template #modalEdit let-modal>
+  <div class="modal-content bg-dark">
+    <div class="modal-header">
+      {{title}}
+      <button type="button" class="btn-close btn-close-white" (click)="modal.close()"></button>
+    </div>
+    <div class="modal-body">
+      <app-alert [result]="editResult"></app-alert>
+      <app-loading [loading]="loading"></app-loading>
+      <ng-content *ngIf="!loading"></ng-content>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Annulla</button>
+      <button type="button" class="btn btn-danger" (click)="onSave()">Salva</button>
+    </div>
+  </div>
+</ng-template>

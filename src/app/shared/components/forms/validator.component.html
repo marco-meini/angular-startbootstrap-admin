@@ -1,0 +1,5 @@
+<div class="text-danger" *ngIf="control.invalid && (control.dirty || control.touched)">
+  <small *ngIf="requiredMessage && control.hasError('required')">{{requiredMessage}}</small>
+  <small *ngIf="emailMessage && control.hasError('email')">{{emailMessage}}</small>
+  <ng-content></ng-content>
+</div>
