@@ -9,6 +9,10 @@ export interface ApiResponse<T> {
   data: T | null;
 }
 
+interface QueryParams {
+  [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,9 +32,9 @@ export class ApiService {
     }
   }
 
-  get<T>(path: string): Promise<ApiResponse<T>> {
+  get<T>(path: string, query: QueryParams = {}): Promise<ApiResponse<T>> {
     return new Promise<ApiResponse<T>>((resolve, reject) => {
-      this.http.get<T>(API_RELATIVE_PATH + path).subscribe({
+      this.http.get<T>(API_RELATIVE_PATH + path, { params: query }).subscribe({
         next: (result) => {
           resolve({ result: { success: true }, data: result });
         },
