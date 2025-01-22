@@ -21,12 +21,13 @@ export class ApiService {
 
   private errorHandling<T>(error: any): ApiResponse<T> {
     let message = error.error?.message || error.message || null;
+    let subMessages = error.error?.subMessages || null;
     if (error.status === 401) {
       return { result: { success: false }, data: null };
     } else if (error.status === 403) {
       return { result: { success: false, message: message || 'Non sei autorizzato ad eseguire questa azione' }, data: null };
     } else if (error.status === 400) {
-      return { result: { success: false, message: message || "Parametri non validi" }, data: null };
+      return { result: { success: false, message: message || "Parametri non validi", subMessages }, data: null };
     } else {
       return { result: { success: false, message: message || 'Si è verificato un errore' }, data: null };
     }
